@@ -54,6 +54,44 @@ const router = express.Router();
  *       - Jobs
  *     summary: Updates a job
  *     description: Updates a job
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the job to update
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               company:
+ *                 type: string
+ *               position:
+ *                 type: string
+ *               status:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Job updated successfully
+ *       400:
+ *         description: Bad request, missing or invalid parameters
+ * /delete:
+ *   delete:
+ *     tags:
+ *       - Jobs
+ *     summary: Deletes a job
+ *     description: Deletes a job
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the job to update
+ *         schema:
+ *           type: integer
  *     requestBody:
  *       required: true
  *       content:
