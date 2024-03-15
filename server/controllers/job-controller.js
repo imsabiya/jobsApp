@@ -1,13 +1,15 @@
 const Job = require("../models/job-model");
 
 const addJob = async (req, res) => {
-  const { company, position, status } = req.body;
+  const { company, position, jobLocation, status, jobType } = req.body;
   // console.log(req.user, "useradas");
   try {
     const newJob = new Job({
       company,
       position,
       status,
+      jobLocation,
+      jobType,
       createdBy: req.user.id,
     });
     await newJob.save();
@@ -20,11 +22,11 @@ const addJob = async (req, res) => {
 const updateJob = async (req, res) => {
   const { id } = req.query;
   //console.log(id, "id")
-  const { company, position, status } = req.body;
+  const { company, position, status , jobLocation, jobType} = req.body;
   try {
     const job = await Job.findByIdAndUpdate(
       id,
-      { company, position, status },
+      { company, position, status, jobLocation, jobType },
       { new: true }
     );
     //console.log(job, "job");

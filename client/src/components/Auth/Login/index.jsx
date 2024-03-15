@@ -5,7 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Login = ({ setIsLoggedIn }) => {
+const Login = () => {
   const navigate = useNavigate();
 
   const {
@@ -24,16 +24,15 @@ const Login = ({ setIsLoggedIn }) => {
     console.log(loginData, "loginData");
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_OUR_PLACES_URL}/login`,
+        `${process.env.REACT_APP_JOBS_APP_URL}/login`,
         loginData
       );
       const data = res.data;
       toast.success(data.message);
-      sessionStorage.setItem("token", data.payload.token);
-      sessionStorage.setItem("userId", data.payload.userId);
-      setIsLoggedIn(true);
-      navigate("/");
-      //window.location.reload();
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("user", JSON.stringify(data.user));
+      //setIsLoggedIn(true);
+      navigate("/stats");
       reset();
     } catch (error) {
       toast.error(error?.response?.data?.error);
@@ -44,7 +43,10 @@ const Login = ({ setIsLoggedIn }) => {
       <ToastContainer autoClose={2000} />
       <div className="flex container mx-auto justify-center place-items-center mt-12">
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 border-t-4 border-indigo-500">
-          <h2 className="text-2xl font-bold my-2 text-indigo-500 italic tracking-wider hover:cursor-pointer" onClick={() => navigate("/")}>
+          <h2
+            className="text-2xl font-bold my-2 text-indigo-500 italic tracking-wider hover:cursor-pointer"
+            onClick={() => navigate("/")}
+          >
             Jobster
           </h2>
           <h2 className="text-2xl font-bold my-2">Login</h2>

@@ -36,7 +36,7 @@ const ResetPwd = () => {
     console.log(resetPwdData, "loginData");
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_OUR_PLACES_URL}/resetPassword`,
+        `${process.env.REACT_APP_JOBS_APP_URL}/resetPassword`,
         resetPwdData
       );
       const data = res.data;

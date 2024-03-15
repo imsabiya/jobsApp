@@ -12,10 +12,20 @@ const jobSchema = new mongoose.Schema(
       required: [true, "Please provide position"],
       maxlength: 100,
     },
+    jobLocation: {
+      type: String,
+      required: [true, "Please provide job location"],
+      maxlength: 100,
+    },
     status: {
       type: String,
       enum: ["interview", "declined", "pending"],
       default: "pending",
+    },
+    jobType: {
+      type: String,
+      enum: ["full-time", "part-time", "remote", "internship"],
+      default: "full-time",
     },
     createdBy: {
       type: mongoose.Types.ObjectId,

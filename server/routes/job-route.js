@@ -115,6 +115,6 @@ const router = express.Router();
 router.route("/addJob").post(addJob);
 router.route("/job?:id").put(updateJob).delete(deleteJob);
 router.route("/getAllJobs").get(getAllJobs);
-router.route("/jobs?:id").get(getAllJobsByUserId);
+router.route("/jobs?:userId").get(getAllJobsByUserId);
 
 module.exports = router;

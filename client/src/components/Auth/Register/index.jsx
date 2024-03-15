@@ -27,8 +27,6 @@ const Register = () => {
 
   const passwordValue = watch("password");
 
-  //console.log(process.env.REACT_APP_OUR_PLACES_URL, "url");
-
   useEffect(() => {
     if (passwordValue) {
       setPassword(passwordValue);
@@ -38,12 +36,12 @@ const Register = () => {
   const submitHandler = async (registerData) => {
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_OUR_PLACES_URL}/register`,
+        `${process.env.REACT_APP_JOBS_APP_URL}/register`,
         registerData
       );
       const data = res.data;
       toast.success(data.message);
-      navigate("/");
+      navigate("/login");
       reset();
     } catch (error) {
       toast.error(error?.response?.data?.error);
@@ -55,7 +53,10 @@ const Register = () => {
       <ToastContainer autoClose={2000} />
       <div className="flex container mx-auto justify-center place-items-center mt-12">
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 border-t-4 border-indigo-500">
-          <h2 className="text-2xl font-bold my-2 text-indigo-500 italic tracking-wider hover:cursor-pointer" onClick={() => navigate("/")}>
+          <h2
+            className="text-2xl font-bold my-2 text-indigo-500 italic tracking-wider hover:cursor-pointer"
+            onClick={() => navigate("/")}
+          >
             Jobster
           </h2>
           <h2 className="text-2xl font-bold my-2">Register</h2>

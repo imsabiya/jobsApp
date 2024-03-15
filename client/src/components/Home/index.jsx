@@ -1,37 +1,81 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Routes, Route, NavLink, useNavigate } from "react-router-dom";
 
-const Home = () => {
-  const navigate = useNavigate();
+const Home = ({ component }) => {
+  // const navigate = useNavigate();
+
+  // const [currentTab, setCurrentTab] = useState("Stats");
+
+  // const tabs = [
+  //   {
+  //     name: "Stats",
+  //     link: "#stats",
+  //     content: <>Stats content</>,
+  //   },
+  //   {
+  //     name: "All Jobs",
+  //     link: "#allJobs",
+  //     content: <>All Jobs content</>,
+  //   },
+  //   {
+  //     name: "Add Job",
+  //     link: "#addJob",
+  //     content: <>Add Job content</>,
+  //   },
+  //   {
+  //     name: "Profile",
+  //     link: "#profile",
+  //     content: <>Profile content</>,
+  //   },
+  // ];
 
   return (
-    <>
-      <div className="container mx-4 flex flex-col justify-center place-items-start mt-12 gap-y-12">
-        <h2 className="text-4xl font-bold italic lg:ml-8 ">Jobster</h2>
-        <div className="grid grid-cols-2 justify-start place-items-start mt-8 lg:ml-8">
-          <div className="flex flex-col place-items-start mt-8 gap-y-8">
-            <h2 className="uppercase text-2xl font-bold"> Job Tracking App</h2>
-            <p className="text-left w-3/4">
-              Crucifix narwhal street art asymmetrical, humblebrag tote bag
-              pop-up fixie raclette taxidermy craft beer. Brunch bitters synth,
-              VHS crucifix heirloom meggings bicycle rights.
-            </p>
-            <button
-              className="btn btn-primary"
-              onClick={() => navigate("/login")}
-            >
-              Login / Register
-            </button>
-          </div>
-          <div className="">
-            <img
-              src="https://redux-toolkit-jobster.netlify.app/static/media/main.17b316de742b3a1202078c5ae18c8261.svg"
-              alt="Home banner"
-            />
-          </div>
+    <div className="w-full overflow-x-hidden ">
+      <div className="container mx-0 navbar bg-base-100">
+        <div className="flex-1">
+          <h2 className="text-3xl font-bold italic tracking-widest">Jobster</h2>
+        </div>
+        <div className="flex-none">
+          <ul className="menu menu-horizontal px-1">
+            <li>
+              <details>
+                <summary>UserName </summary>
+                <ul className="p-2 bg-base-100 rounded-t-none">
+                  <li>
+                    <a>Profile</a>
+                  </li>
+                  <li>
+                    <a>Logout</a>
+                  </li>
+                </ul>
+              </details>
+            </li>
+            <li></li>
+          </ul>
         </div>
       </div>
-    </>
+      <div className="grid grid-cols-[10%_90%] gap-2 mt-2 w-full h-full">
+        <div className="flex flex-col justify-start place-items-center my-12 px-2">
+          <ul className="flex flex-col justify-start place-items-start gap-8">
+            <li>
+              <NavLink to="/stats">Stats</NavLink>
+            </li>
+            <li>
+              <NavLink to="/all-jobs">All Jobs</NavLink>
+            </li>
+            <li>
+              <NavLink to="/add-job">Add Job</NavLink>
+            </li>
+            <li>
+              <NavLink to="/profile">Profile</NavLink>
+            </li>
+          </ul>
+        </div>
+        <div className="bg-slate-100 flex flex-col justify-start place-items-start">
+          {component}
+        </div>
+      </div>
+    </div>
   );
 };
 
