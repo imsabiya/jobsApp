@@ -12,7 +12,7 @@ const EditJobComp = () => {
 
   const { id } = useParams();
 
-  const getJobByJobId = async () => {
+  const getJobByJobId = async (id) => {
     console.log("kjsdkjas jkhkjas");
 
     const paramsData = {
@@ -33,7 +33,7 @@ const EditJobComp = () => {
       );
       const data = await res.data;
       console.log(data.job, "data");
-      console.log(data, "jkhsadjkasjk");
+      // console.log(data, "jkhsadjkasjk");
       setEditJob(data.job);
     } catch (error) {
       toast.error(error.message);
@@ -41,9 +41,11 @@ const EditJobComp = () => {
   };
 
   useEffect(() => {
-    getJobByJobId();
-    console.log(editJob, "editJob");
+    getJobByJobId(id);
+    //console.log(editJob, "editJob");
   }, []);
+
+  console.log(editJob, "editJob");
 
   const {
     register,
@@ -106,7 +108,8 @@ const EditJobComp = () => {
                 type="text"
                 placeholder="Company"
                 className="input input-bordered"
-                // value={editJob.company}
+                name="company"
+                // ref={register}
                 {...register("company", {
                   required: true,
                   pattern: {

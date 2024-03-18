@@ -40,7 +40,7 @@ const AllJobs = () => {
 
   useEffect(() => {
     getAllJobsByUserId();
-  }, []);
+  }, [token, userObj]);
 
   const editJob = async (jobId) => {
     console.log(jobId);

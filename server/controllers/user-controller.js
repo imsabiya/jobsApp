@@ -96,7 +96,7 @@ const editUserDetails = async (req, res) => {
       { name, email, location, userName },
       { new: true }
     );
-    // console.log(updatedUser, user, "iu");
+    
     if (!updatedUser) {
       return res.status(401).json({ message: `User doesn't exist` });
     }
