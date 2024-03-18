@@ -1,7 +1,7 @@
 import React from "react";
 import JobCard from "./JobCard";
 
-const AllJobsComp = ({ jobsData }) => {
+const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
   return (
     <>
       <div className="bg-white rounded-md shadow-xl w-[98%] my-6 mx-4 px-4 py-4 flex flex-col justify-start place-items-start">
@@ -69,7 +69,9 @@ const AllJobsComp = ({ jobsData }) => {
           <h2 className="font-bold text-xl">{jobsData.totalJobs} Jobs Found</h2>
           <div className="grid grid-cols-2 gap-4 my-4 w-full">
             {jobsData.jobs.map((job) => {
-              return <JobCard job={job} />;
+              return (
+                <JobCard job={job} editJob={editJob} deleteJob={deleteJob} />
+              );
             })}
           </div>
         </div>

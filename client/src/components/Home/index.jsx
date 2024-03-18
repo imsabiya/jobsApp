@@ -30,7 +30,7 @@ const Home = ({ component }) => {
   // ];
 
   return (
-    <div className="w-full overflow-x-hidden ">
+    <div className="w-[100%] overflow-x-hidden h-[100%]">
       <div className="container mx-0 navbar bg-base-100">
         <div className="flex-1">
           <h2 className="text-3xl font-bold italic tracking-widest">Jobster</h2>

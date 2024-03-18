@@ -22,7 +22,7 @@ const addJob = async (req, res) => {
 const updateJob = async (req, res) => {
   const { id } = req.query;
   //console.log(id, "id")
-  const { company, position, status , jobLocation, jobType} = req.body;
+  const { company, position, status, jobLocation, jobType } = req.body;
   try {
     const job = await Job.findByIdAndUpdate(
       id,
@@ -84,10 +84,23 @@ const getAllJobsByUserId = async (req, res) => {
   }
 };
 
+const getJobByJobId = async (req, res) => {
+  const { id } = req.query.id;
+
+  try {
+    const job = await Job.findOne({ id });
+    console.log(job);
+    res.status(200).json({ message: job });
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+};
+
 module.exports = {
   addJob,
   updateJob,
   deleteJob,
   getAllJobs,
   getAllJobsByUserId,
+  getJobByJobId
 };

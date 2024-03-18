@@ -9,6 +9,8 @@ import LandingPage from "./components/LandingPage";
 import Stats from "./components/Stats";
 import AllJobs from "./components/AllJobs";
 import AddJob from "./components/AddJob";
+import Profile from "./components/Profile";
+import EditJob from "./components/AllJobs/EditJob";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/stats" element={<Stats />} />
         <Route path="/all-jobs" element={<AllJobs />} />
         <Route path="/add-job" element={<AddJob />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/edit-job/:id" element={<EditJob />}/>
       </Routes>
     </div>
   );
