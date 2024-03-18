@@ -7,14 +7,14 @@ import "react-toastify/dist/ReactToastify.css";
 
 const EditJobComp = () => {
   const token = sessionStorage.getItem("token");
-  const { id } = useParams();
-  console.log(id);
-
   const [editJob, setEditJob] = useState({});
+  const navigate = useNavigate();
+
+  const { id } = useParams();
 
   const getJobByJobId = async () => {
     console.log("kjsdkjas jkhkjas");
-    
+
     const paramsData = {
       id: id,
     };
@@ -32,8 +32,9 @@ const EditJobComp = () => {
         config
       );
       const data = await res.data;
-      console.log(data.message, "jkhsadjkasjk");
-      setEditJob(data.message);
+      console.log(data.job, "data");
+      console.log(data, "jkhsadjkasjk");
+      setEditJob(data.job);
     } catch (error) {
       toast.error(error.message);
     }
@@ -42,9 +43,7 @@ const EditJobComp = () => {
   useEffect(() => {
     getJobByJobId();
     console.log(editJob, "editJob");
-  }, [id]);
-
-  //console.log(editJob, "editJob")
+  }, []);
 
   const {
     register,
@@ -61,10 +60,8 @@ const EditJobComp = () => {
     },
   });
 
-  const navigate = useNavigate();
-
   const submitHandler = async (data) => {
-    console.log(data, "data");
+    //console.log(data, "data");
 
     const paramsData = {
       id: editJob._id,
@@ -109,7 +106,7 @@ const EditJobComp = () => {
                 type="text"
                 placeholder="Company"
                 className="input input-bordered"
-                //value={editJob.company}
+                // value={editJob.company}
                 {...register("company", {
                   required: true,
                   pattern: {

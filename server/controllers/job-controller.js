@@ -90,7 +90,7 @@ const getJobByJobId = async (req, res) => {
   try {
     const job = await Job.findOne({ id });
     console.log(job);
-    res.status(200).json({ message: job });
+    res.status(200).json({ job: job });
   } catch (error) {
     res.status(500).json({ message: error });
   }
@@ -102,5 +102,5 @@ module.exports = {
   deleteJob,
   getAllJobs,
   getAllJobsByUserId,
-  getJobByJobId
+  getJobByJobId,
 };

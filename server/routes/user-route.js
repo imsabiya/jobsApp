@@ -3,8 +3,10 @@ const {
   login,
   resetPwd,
   getAllUsers,
+  editUserDetails,
 } = require("../controllers/user-controller");
 const express = require("express");
+const authMiddleware = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
@@ -99,5 +101,6 @@ router.route("/register").post(register);
 router.route("/getAllUsers").get(getAllUsers);
 router.route("/login").post(login);
 router.route("/resetPwd").post(resetPwd);
+router.route("/editUserProfile").put(authMiddleware, editUserDetails);
 
 module.exports = router;

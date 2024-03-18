@@ -1,5 +1,3 @@
-
-
 const User = require("../models/user-model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -7,14 +5,20 @@ const jwt = require("jsonwebtoken");
 const SECRET_KEY = `My kitty says meow...`;
 
 const register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, userName, location } = req.body;
   try {
     const user = await User.findOne({ email });
     if (user) {
       res.status(400).json({ error: "User already registered!" });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ name, email, password: hashedPassword });
+    const newUser = new User({
+      name,
+      email,
+      password: hashedPassword,
+      userName,
+      location,
+    });
     await newUser.save();
     res
       .status(200)
@@ -70,7 +74,12 @@ const getAllUsers = async (req, res) => {
     const users = await User.find();
     res.status(200).json(
       users.map((user) => {
-        return { name: user.name, email: user.email };
+        return {
+          name: user.name,
+          email: user.email,
+          userName: user.userName,
+          location: user.location,
+        };
       })
     );
   } catch (error) {
@@ -78,4 +87,25 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-module.exports = { register, login, resetPwd, getAllUsers };
+const editUserDetails = async (req, res) => {
+  const { name, email, location, userName } = req.body;
+  const userId = req.user.id;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { name, email, location, userName },
+      { new: true }
+    );
+    // console.log(updatedUser, user, "iu");
+    if (!updatedUser) {
+      return res.status(401).json({ message: `User doesn't exist` });
+    }
+    return res
+      .status(200)
+      .json({ message: "UserProfile updated successfully", data: updatedUser });
+  } catch (error) {
+    res.status(400).json({ message: error });
+  }
+};
+
+module.exports = { register, login, resetPwd, getAllUsers, editUserDetails };

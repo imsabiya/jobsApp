@@ -13,8 +13,8 @@ const ProfileComp = () => {
     defaultValues: {
       name: userObj.name,
       email: userObj.email,
-      userName: "",
-      location: "",
+      userName: userObj.userName,
+      location: userObj.location,
     },
   });
 
