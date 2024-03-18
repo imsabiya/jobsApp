@@ -85,12 +85,56 @@ const getAllJobsByUserId = async (req, res) => {
 };
 
 const getJobByJobId = async (req, res) => {
-  const { id } = req.query.id;
+  const { id } = req.query;
 
   try {
-    const job = await Job.findOne({ id });
+    const job = await Job.findById(id);
     console.log(job);
     res.status(200).json({ job: job });
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+};
+
+const applyFilters = async (req, res) => {
+  const { search, status, jobType, sort } = req.query;
+  const company = search;
+  // const position = search;
+  // const location = search;
+  const filteredJob = {};
+  if (company) {
+    filteredJob.company = { $regex: company, $options: "i" };
+  }
+  // if (position) {
+  //   filteredJob.position = { $regex: position, $options: "i" };
+  // }
+  // if (location) {
+  //   filteredJob.location = { $regex: location, $options: "i" };
+  // }
+
+  if (status) {
+    filteredJob.status = status;
+  }
+  if (jobType) {
+    filteredJob.jobType = jobType;
+  }
+
+  let sortOptions = {};
+
+  if (sort === "latest") {
+    sortOptions.createdAt = -1;
+  } else if (sort === "oldest") {
+    sortOptions.createdAt = 1;
+  } else if (sort === "a-z") {
+    sortOptions.company = 1;
+  } else if (sort === "z-a") {
+    sortOptions.company = -1;
+  }
+
+  try {
+    const filteredJobs = await Job.find(filteredJob).sort(sortOptions);
+    //console.log(filteredJobs);
+    res.status(200).json({ job: filteredJobs });
   } catch (error) {
     res.status(500).json({ message: error });
   }
@@ -103,4 +147,5 @@ module.exports = {
   getAllJobs,
   getAllJobsByUserId,
   getJobByJobId,
+  applyFilters,
 };

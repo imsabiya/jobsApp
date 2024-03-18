@@ -34,9 +34,9 @@ const AddJobComp = () => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
-      data: {...data },
+      data: { ...data },
     };
 
     try {
@@ -76,12 +76,13 @@ const AddJobComp = () => {
                   },
                 })}
               />
+              {errors.company && (
+                <span className="text-red-400 text-left text-sm">
+                  {errors.company.message}
+                </span>
+              )}
             </div>
-            {errors.company && (
-              <span className="text-red-400 text-left text-sm">
-                {errors.company}
-              </span>
-            )}
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Position</span>
@@ -98,12 +99,13 @@ const AddJobComp = () => {
                   },
                 })}
               />
+              {errors.position && (
+                <span className="text-red-400 text-left text-sm">
+                  {errors.position.message}
+                </span>
+              )}
             </div>
-            {errors.position && (
-              <span className="text-red-400 text-left text-sm">
-                {errors.position}
-              </span>
-            )}
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Job Location</span>
@@ -120,12 +122,13 @@ const AddJobComp = () => {
                   },
                 })}
               />
+              {errors.jobLocation && (
+                <span className="text-red-400 text-left text-sm">
+                  {errors.jobLocation.message}
+                </span>
+              )}
             </div>
-            {errors.jobLocation && (
-              <span className="text-red-400 text-left text-sm">
-                {errors.jobLocation}
-              </span>
-            )}
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Status</span>
@@ -154,7 +157,10 @@ const AddJobComp = () => {
               </select>
             </div>
             <div className="flex gap-2 justify-start place-items-end">
-              <button className="btn btn-neutral w-1/2 tracking-wider">
+              <button
+                className="btn btn-neutral w-1/2 tracking-wider"
+                onClick={() => reset()}
+              >
                 Clear
               </button>
               <button className="btn btn-primary w-1/2 tracking-wider">

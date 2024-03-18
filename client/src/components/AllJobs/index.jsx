@@ -31,7 +31,7 @@ const AllJobs = () => {
         config
       );
       const data = res.data;
-      console.log(data.message);
+      //console.log(data.message);
       setJobsData(data.message);
     } catch (error) {
       toast.error(error.message);
@@ -40,10 +40,10 @@ const AllJobs = () => {
 
   useEffect(() => {
     getAllJobsByUserId();
-  }, [token, userObj]);
+  }, []);
 
   const editJob = async (jobId) => {
-    console.log(jobId);
+    console.log(jobId, "jobId");
     navigate(`/edit-job/${jobId}`);
   };
 

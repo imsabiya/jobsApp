@@ -11,9 +11,11 @@ const EditJobComp = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
+  console.log(id, "idHere");
 
   const getJobByJobId = async (id) => {
-    console.log("kjsdkjas jkhkjas");
+    //console.log("kjsdkjas jkhkjas");
+    console.log(id, "async Id");
 
     const paramsData = {
       id: id,
@@ -32,8 +34,6 @@ const EditJobComp = () => {
         config
       );
       const data = await res.data;
-      console.log(data.job, "data");
-      // console.log(data, "jkhsadjkasjk");
       setEditJob(data.job);
     } catch (error) {
       toast.error(error.message);
@@ -42,31 +42,29 @@ const EditJobComp = () => {
 
   useEffect(() => {
     getJobByJobId(id);
-    //console.log(editJob, "editJob");
-  }, []);
-
-  console.log(editJob, "editJob");
+  }, [id]);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
-    defaultValues: {
-      company: editJob.company,
-      position: editJob.position,
-      jobLocation: editJob.jobLocation,
-      status: editJob.status,
-      jobType: editJob.jobType,
-    },
-  });
+  } = useForm();
+  // useForm({
+  //   defaultValues: {
+  //     company: editJob?.company,
+  //     position: editJob?.position,
+  //     jobLocation: editJob?.jobLocation,
+  //     status: editJob?.status,
+  //     jobType: editJob?.jobType,
+  //   },
+  // });
 
   const submitHandler = async (data) => {
-    //console.log(data, "data");
+    console.log(data, "data");
 
     const paramsData = {
-      id: editJob._id,
+      id: id,
     };
 
     const config = {
@@ -85,13 +83,17 @@ const EditJobComp = () => {
         config
       );
       const data = res.data;
+      //console.log(data, "data");
       toast.success(data.message);
       navigate("/all-jobs");
       reset();
+      setEditJob({});
     } catch (error) {
       toast.error(error?.response?.data?.error);
     }
   };
+
+  console.log(editJob.status, editJob.jobType);
 
   return (
     <>
@@ -109,7 +111,7 @@ const EditJobComp = () => {
                 placeholder="Company"
                 className="input input-bordered"
                 name="company"
-                // ref={register}
+                defaultValue={editJob?.company}
                 {...register("company", {
                   required: true,
                   pattern: {
@@ -118,12 +120,12 @@ const EditJobComp = () => {
                   },
                 })}
               />
+              {errors.company && (
+                <span className="text-red-400 text-left text-sm">
+                  {errors?.company?.message}
+                </span>
+              )}
             </div>
-            {errors.company && (
-              <span className="text-red-400 text-left text-sm">
-                {errors.company}
-              </span>
-            )}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Position</span>
@@ -132,6 +134,7 @@ const EditJobComp = () => {
                 type="text"
                 placeholder="Position"
                 className="input input-bordered"
+                defaultValue={editJob?.position}
                 {...register("position", {
                   required: true,
                   pattern: {
@@ -140,12 +143,13 @@ const EditJobComp = () => {
                   },
                 })}
               />
+              {errors.position && (
+                <span className="text-red-400 text-left text-sm bg-primary">
+                  {errors.position.message}
+                </span>
+              )}
             </div>
-            {errors.position && (
-              <span className="text-red-400 text-left text-sm">
-                {errors.position}
-              </span>
-            )}
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Job Location</span>
@@ -154,6 +158,7 @@ const EditJobComp = () => {
                 type="text"
                 placeholder="Job Location"
                 className="input input-bordered"
+                defaultValue={editJob?.jobLocation}
                 {...register("jobLocation", {
                   required: true,
                   pattern: {
@@ -162,23 +167,25 @@ const EditJobComp = () => {
                   },
                 })}
               />
+              {errors.jobLocation && (
+                <span className="text-red-400 text-left text-sm">
+                  {errors.jobLocation.message}
+                </span>
+              )}
             </div>
-            {errors.jobLocation && (
-              <span className="text-red-400 text-left text-sm">
-                {errors.jobLocation}
-              </span>
-            )}
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Status</span>
               </label>
               <select
                 className="select select-bordered"
+                defaultValue={editJob?.status}
                 {...register("status", { required: true })}
               >
-                <option>interview</option>
-                <option>declined</option>
-                <option selected>pending</option>
+                <option value="interview">interview</option>
+                <option value="declined">declined</option>
+                <option value="pending">pending</option>
               </select>
             </div>
             <div className="form-control">
@@ -187,16 +194,20 @@ const EditJobComp = () => {
               </label>
               <select
                 className="select select-bordered"
+                defaultValue={editJob.jobType}
                 {...register("jobType", { required: true })}
               >
-                <option selected>full-time</option>
-                <option>part-time</option>
-                <option>remote</option>
-                <option>internship</option>
+                <option value={"full-time"}>full-time</option>
+                <option value={"part-time"}>part-time</option>
+                <option value={"remote"}>remote</option>
+                <option value={"internship"}>internship</option>
               </select>
             </div>
             <div className="flex gap-2 justify-start place-items-end">
-              <button className="btn btn-neutral w-1/2 tracking-wider">
+              <button
+                className="btn btn-neutral w-1/2 tracking-wider"
+                onClick={() => reset()}
+              >
                 Clear
               </button>
               <button className="btn btn-primary w-1/2 tracking-wider">

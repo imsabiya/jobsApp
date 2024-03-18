@@ -2,32 +2,7 @@ import React, { useState } from "react";
 import { Routes, Route, NavLink, useNavigate } from "react-router-dom";
 
 const Home = ({ component }) => {
-  // const navigate = useNavigate();
-
-  // const [currentTab, setCurrentTab] = useState("Stats");
-
-  // const tabs = [
-  //   {
-  //     name: "Stats",
-  //     link: "#stats",
-  //     content: <>Stats content</>,
-  //   },
-  //   {
-  //     name: "All Jobs",
-  //     link: "#allJobs",
-  //     content: <>All Jobs content</>,
-  //   },
-  //   {
-  //     name: "Add Job",
-  //     link: "#addJob",
-  //     content: <>Add Job content</>,
-  //   },
-  //   {
-  //     name: "Profile",
-  //     link: "#profile",
-  //     content: <>Profile content</>,
-  //   },
-  // ];
+  const userObj = JSON.parse(sessionStorage.getItem("user"));
 
   return (
     <div className="w-[100%] overflow-x-hidden h-[100%]">
@@ -37,12 +12,12 @@ const Home = ({ component }) => {
         </div>
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
-            <li>
+            <li className="">
               <details>
-                <summary>UserName </summary>
+                <summary className="capitalize">{userObj.name} </summary>
                 <ul className="p-2 bg-base-100 rounded-t-none">
                   <li>
-                    <a>Profile</a>
+                    <NavLink to="/profile">Profile</NavLink>
                   </li>
                   <li>
                     <a>Logout</a>
