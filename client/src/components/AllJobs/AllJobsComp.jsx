@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,6 +6,8 @@ import JobCard from "./JobCard";
 
 const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
   const token = sessionStorage.getItem("token");
+
+  const [filteredJobs, setFilteredJobs] = useState([]);
 
   const [paramFilters, setParamFilters] = useState({
     search: "",
@@ -21,7 +22,18 @@ const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
   };
 
   useEffect(() => {
-    getFilteredData();
+    if (
+      paramFilters.search === "" &&
+      paramFilters.jobType === "" &&
+      paramFilters.status === "" &&
+      paramFilters.sort === ""
+    ) {
+      //console.log(jobsData,"jDa");
+      getFilteredData();
+      setFilteredJobs(jobsData);
+    } else {
+      getFilteredData();
+    }
   }, [paramFilters]);
 
   const getFilteredData = async () => {
@@ -40,11 +52,21 @@ const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
         config
       );
       const data = res.data;
-      console.log(data, "data");
-      toast.success(data.message);
+      setFilteredJobs(data);
     } catch (error) {
       toast.error(error?.response?.data?.error);
     }
+  };
+
+  const handleReset = (e) => {
+    //e.preventDefault();
+    e.stopPropagation();
+    setParamFilters({
+      search: "",
+      jobType: "",
+      status: "",
+      sort: "",
+    });
   };
 
   return (
@@ -76,9 +98,13 @@ const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
                 name="status"
                 onChange={(e) => changeHandler(e)}
               >
+                <option disabled selected>
+                  {" "}
+                  Select Status
+                </option>
                 <option>interview</option>
                 <option>declined</option>
-                <option selected>pending</option>
+                <option>pending</option>
               </select>
             </div>
             <div className="form-control">
@@ -90,7 +116,11 @@ const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
                 name="jobType"
                 onChange={(e) => changeHandler(e)}
               >
-                <option selected>full-time</option>
+                <option disabled selected>
+                  {" "}
+                  Select Job Type
+                </option>
+                <option>full-time</option>
                 <option>part-time</option>
                 <option>remote</option>
                 <option>internship</option>
@@ -105,7 +135,10 @@ const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
                 name="sort"
                 onChange={(e) => changeHandler(e)}
               >
-                <option selected>latest</option>
+                <option disabled selected>
+                  Select Sort
+                </option>
+                <option>latest</option>
                 <option>oldest</option>
                 <option>a-z</option>
                 <option>z-a</option>
@@ -113,22 +146,24 @@ const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
             </div>
 
             <div className="flex gap-2 justify-start place-items-end">
-              <button className="btn btn-error text-white w-1/2 tracking-widest">
+              <button
+                className="btn btn-error text-white w-1/2 tracking-widest"
+                onClick={(e) => handleReset(e)}
+              >
                 Clear Filters
               </button>
-              {/* <button className="btn btn-primary w-1/2 tracking-wider">
-                Submit
-              </button> */}
             </div>
           </div>
         </form>
       </div>
 
-      {jobsData && (
+      {filteredJobs && (
         <div className="my-6 mx-4 px-4 py-4 w-[98%] flex flex-col justify-start place-items-start">
-          <h2 className="font-bold text-xl">{jobsData.totalJobs} Jobs Found</h2>
+          <h2 className="font-bold text-xl">
+            {filteredJobs?.totalJobs} Jobs Found
+          </h2>
           <div className="grid grid-cols-2 gap-4 my-4 w-full">
-            {jobsData.jobs.map((job) => {
+            {filteredJobs?.jobs?.map((job) => {
               return (
                 <JobCard job={job} editJob={editJob} deleteJob={deleteJob} />
               );

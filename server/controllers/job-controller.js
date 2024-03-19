@@ -134,7 +134,9 @@ const applyFilters = async (req, res) => {
   try {
     const filteredJobs = await Job.find(filteredJob).sort(sortOptions);
     //console.log(filteredJobs);
-    res.status(200).json({ job: filteredJobs });
+    res
+      .status(200)
+      .json({ jobs: filteredJobs, totalJobs: filteredJobs.length });
   } catch (error) {
     res.status(500).json({ message: error });
   }
