@@ -99,7 +99,6 @@ const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
                 onChange={(e) => changeHandler(e)}
               >
                 <option disabled selected>
-                  {" "}
                   Select Status
                 </option>
                 <option>interview</option>
@@ -117,7 +116,6 @@ const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
                 onChange={(e) => changeHandler(e)}
               >
                 <option disabled selected>
-                  {" "}
                   Select Job Type
                 </option>
                 <option>full-time</option>

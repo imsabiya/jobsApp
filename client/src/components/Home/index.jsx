@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Routes, Route, NavLink, useNavigate } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Home = ({ component }) => {
   const userObj = JSON.parse(sessionStorage.getItem("user"));
@@ -20,7 +20,9 @@ const Home = ({ component }) => {
                     <NavLink to="/profile">Profile</NavLink>
                   </li>
                   <li>
-                    <a>Logout</a>
+                    <NavLink to="/" onClick={() => sessionStorage.clear()}>
+                      Logout
+                    </NavLink>
                   </li>
                 </ul>
               </details>
