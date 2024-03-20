@@ -42,7 +42,6 @@ const AllJobs = () => {
   }, []);
 
   const editJob = async (jobId) => {
-    //console.log(jobId, "jobId");
     navigate(`/edit-job/${jobId}`);
   };
 

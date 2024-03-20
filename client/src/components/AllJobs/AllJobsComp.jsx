@@ -110,7 +110,7 @@ const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
                 type="text"
                 placeholder="Company"
                 name="search"
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 onChange={(e) => changeHandler(e)}
               />
             </div>
@@ -120,7 +120,7 @@ const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
                 <span className="label-text">Status</span>
               </label>
               <select
-                className="select select-bordered"
+                className="select select-bordered border-1 border-indigo-400"
                 name="status"
                 onChange={(e) => changeHandler(e)}
               >
@@ -137,7 +137,7 @@ const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
                 <span className="label-text">Job Type</span>
               </label>
               <select
-                className="select select-bordered"
+                className="select select-bordered border-1 border-indigo-400"
                 name="jobType"
                 onChange={(e) => changeHandler(e)}
               >
@@ -155,7 +155,7 @@ const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
                 <span className="label-text">Sort</span>
               </label>
               <select
-                className="select select-bordered"
+                className="select select-bordered border-1 border-indigo-400"
                 name="sort"
                 onChange={(e) => changeHandler(e)}
               >

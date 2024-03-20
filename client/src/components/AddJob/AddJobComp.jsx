@@ -8,8 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 const AddJobComp = () => {
   const token = sessionStorage.getItem("token");
 
-  //console.log(token);
-
   const {
     register,
     handleSubmit,
@@ -28,8 +26,7 @@ const AddJobComp = () => {
   const navigate = useNavigate();
 
   const submitHandler = async (data) => {
-    //console.log(data, "data");
-
+  
     const config = {
       method: "post",
       headers: {
@@ -67,7 +64,7 @@ const AddJobComp = () => {
               <input
                 type="text"
                 placeholder="Company"
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 {...register("company", {
                   required: true,
                   pattern: {
@@ -90,7 +87,7 @@ const AddJobComp = () => {
               <input
                 type="text"
                 placeholder="Position"
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 {...register("position", {
                   required: true,
                   pattern: {
@@ -113,7 +110,7 @@ const AddJobComp = () => {
               <input
                 type="text"
                 placeholder="Job Location"
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 {...register("jobLocation", {
                   required: true,
                   pattern: {
@@ -134,7 +131,7 @@ const AddJobComp = () => {
                 <span className="label-text">Status</span>
               </label>
               <select
-                className="select select-bordered"
+                className="select select-bordered border-1 border-indigo-400"
                 {...register("status", { required: true })}
               >
                 <option>interview</option>
@@ -147,7 +144,7 @@ const AddJobComp = () => {
                 <span className="label-text">Job Type</span>
               </label>
               <select
-                className="select select-bordered"
+                className="select select-bordered border-1 border-indigo-400"
                 {...register("jobType", { required: true })}
               >
                 <option selected>full-time</option>
@@ -163,7 +160,7 @@ const AddJobComp = () => {
               >
                 Clear
               </button>
-              <button className="btn btn-primary w-1/2 tracking-wider">
+              <button className="btn bg-indigo-500 text-white text-md w-1/2 tracking-wider">
                 Submit
               </button>
             </div>

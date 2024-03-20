@@ -58,7 +58,7 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="Email"
-                className="input input-bordered"
+                className="input border-1 border-indigo-400"
                 //required
                 {...register("email", {
                   required: "Email is required",
@@ -81,7 +81,7 @@ const Login = () => {
               <input
                 type="password"
                 placeholder="Password"
-                className="input input-bordered"
+                className="input border-1 border-indigo-400"
                 required
                 {...register("password", {
                   required: "Password is required",
@@ -97,11 +97,8 @@ const Login = () => {
                 </span>
               )}
               <label className="label">
-                {/* <a href="#" className=" text-sm link link-hover">
-                  Forgot password?
-                </a> */}
                 <span
-                  className="text-blue-900 font-normal text-sm hover:underline hover:cursor-pointer"
+                  className="text-indigo-500 font-semibold tracking-wide text-sm hover:underline hover:cursor-pointer"
                   onClick={() => navigate("/resetPwd")}
                 >
                   Forgot password?
@@ -109,12 +106,14 @@ const Login = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary text-lg">Login</button>
+              <button className="btn bg-indigo-500 text-white text-xl">
+                Login
+              </button>
             </div>
             <div className="flex gap-1 justify-center place-items-center my-1">
-              Don't have an account?{" "}
+              Don't have an account?
               <span
-                className="text-blue-700 font-semibold text-md hover:underline hover:cursor-pointer"
+                className="text-indigo-500 font-semibold text-md hover:underline hover:cursor-pointer"
                 onClick={() => navigate("/register")}
               >
                 Create Account

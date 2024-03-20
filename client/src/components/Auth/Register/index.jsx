@@ -68,7 +68,7 @@ const Register = () => {
               <input
                 type="text"
                 placeholder="Name"
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 required
                 {...register("name", {
                   required: "Name is required",
@@ -91,7 +91,7 @@ const Register = () => {
               <input
                 type="email"
                 placeholder="Email"
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 required
                 {...register("email", {
                   required: "Email is required",
@@ -114,7 +114,7 @@ const Register = () => {
               <input
                 type="password"
                 placeholder="Password"
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 {...register("password", {
                   required: "Password is required",
                   minLength: {
@@ -136,7 +136,7 @@ const Register = () => {
               <input
                 type="password"
                 placeholder="Confirm Password"
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 required
                 {...register("confirmPassword", {
                   required: "Confirm Password is required",
@@ -155,12 +155,14 @@ const Register = () => {
               )}
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary text-lg">Register</button>
+              <button className="btn bg-indigo-500 text-white text-xl">
+                Register
+              </button>
             </div>
             <div className="flex gap-1 justify-center place-items-center my-2">
-              Already have an account?{" "}
+              Already have an account?
               <span
-                className="text-blue-700 font-semibold text-md hover:underline hover:cursor-pointer"
+                className="text-indigo-500 font-semibold text-md hover:underline hover:cursor-pointer"
                 onClick={() => navigate("/login")}
               >
                 Login

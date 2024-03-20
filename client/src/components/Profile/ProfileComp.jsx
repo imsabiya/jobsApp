@@ -23,7 +23,7 @@ const ProfileComp = () => {
   });
 
   const submitHandler = async (data) => {
-    console.log(data);
+    //console.log(data);
 
     const config = {
       method: "put",
@@ -61,8 +61,7 @@ const ProfileComp = () => {
               <input
                 type="text"
                 placeholder="Name"
-                //value={userObj.name}
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 {...register("name", {
                   required: true,
                   pattern: {
@@ -83,9 +82,8 @@ const ProfileComp = () => {
               </label>
               <input
                 type="text"
-                //value={userObj.name}
                 placeholder="User Name"
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 {...register("userName", {
                   required: true,
                   pattern: {
@@ -107,8 +105,7 @@ const ProfileComp = () => {
               <input
                 type="email"
                 placeholder="Email"
-                //value={userObj.email}
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 required
                 {...register("email", {
                   required: "Email is required",
@@ -132,7 +129,7 @@ const ProfileComp = () => {
               <input
                 type="text"
                 placeholder="Location"
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 {...register("location", {
                   required: true,
                   pattern: {
@@ -149,7 +146,7 @@ const ProfileComp = () => {
             )}
 
             <div className="flex gap-2 justify-start place-items-end">
-              <button className="btn btn-primary w-1/2 tracking-wider">
+              <button className="btn bg-indigo-500 text-white text-lg w-1/2 tracking-wide">
                 Save Changes
               </button>
             </div>

@@ -25,7 +25,7 @@ const StatsComp = () => {
         config
       );
       const data = res.data;
-      console.log(data, "data");
+      //console.log(data, "data");
       setJobs(data);
     } catch (error) {
       toast.error(error?.response?.data?.error);
@@ -45,7 +45,7 @@ const StatsComp = () => {
       <ToastContainer autoClose={2000} />
       <div className="bg-white px-12 py-8 m-0 my-4 mx-2 flex flex-col justify-start place-items-start w-[98%] rounded-md shadow-xl ">
         <h2 className="font-semibold tracking-wide text-2xl pb-2">Stats</h2>
-        Dashboard
+        {/* Dashboard */}
         <div className="grid grid-cols-3 gap-x-8 gap-y-4 my-4 w-full">
           <div className="flex flex-col h-36 bg-primary rounded-md bg-slate-100 p-4 gap-2 justify-between place-items-start border-b-4 border-yellow-400">
             <div className="flex justify-between place-items-center w-full p-2">
@@ -69,7 +69,7 @@ const StatsComp = () => {
             </div>
             <div className="text-xl font-semibold">Pending Applications</div>
           </div>
-          <div className="flex flex-col  h-36 bg-primary rounded-md bg-slate-100 p-4 gap-2 justify-between place-items-start border-b-4 border-indigo-400">
+          <div className="flex flex-col h-36 bg-primary rounded-md bg-slate-100 p-4 gap-2 justify-between place-items-start border-b-4 border-indigo-400">
             <div className="flex justify-between place-items-center w-full p-2">
               <h2 className="text-5xl font-semibold">
                 {getStatusCount("interview")}

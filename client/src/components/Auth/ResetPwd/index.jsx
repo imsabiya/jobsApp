@@ -33,7 +33,7 @@ const ResetPwd = () => {
   }, [passwordValue]);
 
   const submitHandler = async (resetPwdData) => {
-    console.log(resetPwdData, "loginData");
+    //console.log(resetPwdData, "loginData");
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_JOBS_APP_URL}/resetPassword`,
@@ -66,7 +66,7 @@ const ResetPwd = () => {
               <input
                 type="email"
                 placeholder="Email"
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 required
                 {...register("email", {
                   required: "Email is required",
@@ -89,7 +89,7 @@ const ResetPwd = () => {
               <input
                 type="password"
                 placeholder="Password"
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 required
                 {...register("password", {
                   required: "Password is required",
@@ -112,7 +112,7 @@ const ResetPwd = () => {
               <input
                 type="password"
                 placeholder="Confirm Password"
-                className="input input-bordered"
+                className="input input-bordered border-1 border-indigo-400"
                 required
                 {...register("confirmPassword", {
                   required: "confirm password is required",
@@ -131,7 +131,7 @@ const ResetPwd = () => {
               )}
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary text-md">
+              <button className="btn bg-indigo-500 text-white text-xl">
                 Reset Password
               </button>
             </div>

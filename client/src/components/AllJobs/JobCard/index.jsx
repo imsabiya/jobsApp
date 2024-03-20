@@ -15,10 +15,10 @@ const JobCard = ({ job, editJob, deleteJob }) => {
         res = "bg-indigo-400";
         break;
       case "declined":
-        res = "bg-red-600";
+        res = "bg-red-400";
         break;
       default:
-        res = "bg-neutral-500";
+        res = "bg-neutral";
     }
     return res;
   };
@@ -27,7 +27,7 @@ const JobCard = ({ job, editJob, deleteJob }) => {
     <>
       <div className="bg-white shadow-xl rounded-md p-2 flex flex-col justify-start place-items-start">
         <div className="flex p-2 gap-x-8 w-full justify-start place-items-center border-b-2 m-1 pb-4">
-          <div className="bg-primary rounded-md w-14 h-14 text-white flex justify-center place-items-center font-semibold capitalize text-2xl">
+          <div className="bg-indigo-500 rounded-md w-14 h-14 text-white flex justify-center place-items-center font-semibold capitalize text-2xl">
             {job.company[0]}
           </div>
           <div className="flex flex-col gap-2 justify-start place-items-start capitalize">
