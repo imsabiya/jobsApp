@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Home from "../Home";
+import StatsComp from "./StatsComp";
 
 const Stats = () => {
   return (
     <>
-      <div className="">
-        <Home component={<>Stats page</>} />
+      <div className="w-full h-full">
+        <Home component={<StatsComp />} />
       </div>
     </>
   );

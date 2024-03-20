@@ -68,16 +68,19 @@ const getAllJobs = async (req, res) => {
 };
 
 const getAllJobsByUserId = async (req, res) => {
+  console.log("jaksdjlka");
   const { userId } = req.query;
+  console.log(userId, "userId");
   try {
     const filteredJob = {};
 
     filteredJob.createdBy = userId;
 
-    const filteredJobs = await Job.find(filteredJob);
-    //console.log(filteredJobs, filteredJobs.length);
+    const filteredJobs = await Job.find({ createdBy: userId });
+    console.log(filteredJobs, filteredJobs.length);
     res.status(200).json({
-      message: { jobs: filteredJobs, totalJobs: filteredJobs.length },
+      jobs: filteredJobs,
+      totalJobs: filteredJobs.length,
     });
   } catch (error) {
     res.status(500).json({ message: error });
@@ -97,11 +100,14 @@ const getJobByJobId = async (req, res) => {
 };
 
 const applyFilters = async (req, res) => {
-  const { search, status, jobType, sort } = req.query;
+  const { search, status, jobType, sort, userId } = req.query;
   const company = search;
   // const position = search;
   // const location = search;
   const filteredJob = {};
+
+  filteredJob.createdBy = userId;
+
   if (company) {
     filteredJob.company = { $regex: company, $options: "i" };
   }

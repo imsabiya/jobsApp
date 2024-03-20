@@ -32,7 +32,7 @@ const AllJobs = () => {
       );
       const data = res.data;
       //console.log(data.message);
-      setJobsData(data.message);
+      setJobsData(data);
     } catch (error) {
       toast.error(error.message);
     }
@@ -56,7 +56,7 @@ const AllJobs = () => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
       params: { ...paramsData },
     };

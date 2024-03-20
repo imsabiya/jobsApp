@@ -5,9 +5,11 @@ import "react-toastify/dist/ReactToastify.css";
 import JobCard from "./JobCard";
 
 const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
+  //console.log(jobsData, "jobsDataq");
   const token = sessionStorage.getItem("token");
+  const user = JSON.parse(sessionStorage.getItem("user"));
 
-  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState({});
 
   const [paramFilters, setParamFilters] = useState({
     search: "",
@@ -28,22 +30,46 @@ const AllJobsComp = ({ jobsData, editJob, deleteJob }) => {
       paramFilters.status === "" &&
       paramFilters.sort === ""
     ) {
-      //console.log(jobsData,"jDa");
-      getFilteredData();
-      setFilteredJobs(jobsData);
+      getJobsData();
     } else {
       getFilteredData();
     }
   }, [paramFilters]);
 
+  const getJobsData = async () => {
+    //console.log("running");
+    const paramsData = {
+      userId: user._id,
+    };
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      params: { ...paramsData },
+    };
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_JOBS_APP_URL}/jobs`,
+        config
+      );
+      const data = res.data;
+      setFilteredJobs(data);
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   const getFilteredData = async () => {
+    const paramsData = { ...paramFilters, userId: user._id };
     const config = {
       method: "get",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      params: { ...paramFilters },
+      params: { ...paramsData },
     };
 
     try {
