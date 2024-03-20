@@ -31,7 +31,6 @@ const AllJobs = () => {
         config
       );
       const data = res.data;
-      //console.log(data.message);
       setJobsData(data);
     } catch (error) {
       toast.error(error.message);
@@ -43,7 +42,7 @@ const AllJobs = () => {
   }, []);
 
   const editJob = async (jobId) => {
-    console.log(jobId, "jobId");
+    //console.log(jobId, "jobId");
     navigate(`/edit-job/${jobId}`);
   };
 
